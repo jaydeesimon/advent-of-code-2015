@@ -21,13 +21,12 @@
     directions))
 
 
-(defn index-filter [f coll]
-  (sequence
-    (comp
-      (map-indexed (fn [idx v] [idx v]))
-      (filter (fn [[idx _]] (f idx)))
-      (map (fn [[_ v]] v)))
-    coll))
+(defn collate [coll]
+  (reduce (fn [[evens odds] [even odd]]
+            [(if even (conj evens even) evens)
+             (if odd (conj odds odd) odds)])
+          [[] []]
+          (partition-all 2 coll)))
 
 
 (comment
@@ -37,7 +36,6 @@
 
   ;; Part 2
   (let [directions (utils/input "day03.txt")
-        santa (index-filter even? directions)
-        robot (index-filter odd? directions)]
+        [santa robot] (collate directions)]
     (count (set/union (set (travel [0 0] santa))
                       (set (travel [0 0] robot))))))
