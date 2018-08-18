@@ -1,13 +1,17 @@
 (ns advent-of-code-2015.day01
-  (:require [clojure.java.io :as io]))
+  (:require [clojure.java.io :as io]
+            [advent-of-code-2015.utils :as utils]))
+
 
 (defn paren-vals [parens]
   (map (fn [paren]
          (if (= paren \() 1 -1))
        parens))
 
+
 (defn count-parens [parens]
   (reduce + (paren-vals parens)))
+
 
 (defn find-basement-step [parens]
   (transduce
@@ -22,10 +26,11 @@
            [new-cnt (inc pos)]))))
     (paren-vals parens)))
 
+
 (comment
 
-  (let [part01 (slurp (io/resource "day01.txt"))]
-    (count-parens part01))
+  ;; Part 1
+  (count-parens (utils/input "day01.txt"))
 
-  (let [part02 (slurp (io/resource "day01.txt"))]
-    (find-basement-step part02)))
+  ;; Part 2
+  (find-basement-step (utils/input "day01.txt")))
