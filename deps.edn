@@ -1,3 +1,4 @@
 {:paths ["src" "resources"]
  :deps {com.stuartsierra/dependency {:mvn/version "0.2.0"}
-        org.apache.commons/commons-text {:mvn/version "1.4"}}}
+        org.apache.commons/commons-text {:mvn/version "1.4"}
+        org.clojure/math.combinatorics {:mvn/version "0.1.4"}}}
