@@ -35,7 +35,7 @@
 (defn contains-at-least-two-diff-pairs? [password]
   (let [pairs (->> (partition 2 1 password)
                    frequencies
-                   (filter (fn [[[a b] v]]
+                   (filter (fn [[[a b] _]]
                              (= a b)))
                    count)]
     (>= pairs 2)))
